@@ -1,0 +1,21 @@
+{
+  "name": "guess-the-song",
+  "version": "1.0.0",
+  "description": "Guess the song in a spotify playlist",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "guess",
+    "spotify",
+    "song"
+  ],
+  "author": "Andrew Lorber",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "spotify-web-api-node": "^4.0.0"
+  }
+}

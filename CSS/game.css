@@ -1,0 +1,93 @@
+.hidden {
+	display: none;
+	visibility: hidden;
+}
+.ui-effects-wrapper {    
+    display: inline-block;
+}
+#Title {
+	color: green;
+	text-align: center;
+	margin-top: .3em;
+	margin-bottom: .5em;
+}
+#Timer_div {
+	align-content: center;
+	justify-content: center;
+	width: 100%;
+	display: flex;
+}
+#Circle_timer {
+	text-align: center;
+}
+#Pause_button {
+	display: inline;
+	float: right;
+	position: relative;
+	top: -6em;
+	right: 1em;
+}
+#Head_text {
+	margin-bottom: .8em;
+	text-align: center;
+	width: 100%;
+}
+#Guess_response {
+	text-align: center;
+	width: 100%;
+}
+#Start_game {
+	justify-content: center;
+}
+#Start_button {
+	text-align: center;
+	width: 80%;
+}
+#Loading_text_div{
+	justify-content: center;
+	width: 100%;
+}
+#Loading_text {
+	font-size: 1.5em;
+}
+#Spinner_div{
+	justify-content: center;
+	position: relative;
+	right: 1.2em;
+}
+.spinner-border {
+	width: 3em;
+	height: 3em;
+}
+#List_div {
+	justify-content: center;
+}
+#List {
+	width: 100%;
+	list-style-type: none;
+	justify-content: center;
+}
+ul li {
+	text-align: center;
+	padding-bottom: .7em;
+	position: relative;
+	left: -1em;
+} 
+.track_choices{
+	width: 100%;
+}
+.device, .playlistName {
+	width: 40%;
+	margin: auto;
+}
+#Modal_title {
+	text-align: center;
+	color: green;
+	width: 100%;
+}
+.modal_button {
+	width: 100%;
+	text-align: center;
+	margin-bottom: .4em;
+	margin-top: .4em;
+}

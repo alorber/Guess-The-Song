@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="../CSS/index.CSS">
+		<title>Guess the Song</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<h1>Guess the Song</h1>
+			</div>
+			<div id="name">
+				<p>Created by Andrew Lorber</p>
+			</div>
+			<div class="row" id="Instructions">
+				<p id="P1" class="hidden">This is a Spotify song guessing game</p> 
+				<p id="P2">Open Spotify on one of your devices</p> 
+				<p id="P3">Select which device and playlist you would like to play with</p> 
+				<p id="P4">A random song from the playlist will play on your device</p> 
+				<p id="P5">Try to guess which song is playing</p> 
+				<p id="P6">See how many points you can score in one minute!</p>
+			</div>
+			<div class="row" id="Login">
+				<p id="Log_in_text">Please log into your spotify account to play. <br><span style="font-size: .6em;">Note: You must have a premium account to play this game.</span></p>
+			</div>
+			<div id="Log_in_div">
+				<a href=<%=authurl%> class="btn btn-outline-success" id="Log_in_button" role="button">Log in</a>	
+			</div>
+
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+		<script src="../JavaScript/index.js" type="text/javascript"></script>
+
+	</body>
+</html>

@@ -1,0 +1,33 @@
+h1 {
+	text-align: center;
+	width: 100%;
+	color: green;
+}
+#name {
+	font-size: .6em;
+	justify-content: center;
+	width: 100%;
+}
+#name p {
+	text-align: center;
+}
+#Instructions p, #Log_in_text{
+	display: none;
+	text-align: center;
+	width: 100%;
+	font-size: 1.5em;
+}
+#Login {
+	margin-top: .5em;
+}
+#Log_in_div {
+	width: 100%;
+	justify-content: center;
+	display: flex;
+}
+#Log_in_button {
+	width: 80%;
+	text-align: center;
+	margin: 1em auto;
+	display: none;
+}
