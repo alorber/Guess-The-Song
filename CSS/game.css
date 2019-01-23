@@ -26,6 +26,7 @@
 	position: relative;
 	top: -6em;
 	right: 1em;
+	margin-bottom: -1em;
 }
 #Head_text {
 	margin-bottom: .8em;
@@ -39,16 +40,13 @@
 #Start_game {
 	justify-content: center;
 }
-#Start_button {
-	text-align: center;
-	width: 80%;
-}
 #Loading_text_div{
 	justify-content: center;
 	width: 100%;
 }
 #Loading_text {
 	font-size: 1.5em;
+	text-align: center;
 }
 #Spinner_div{
 	justify-content: center;
@@ -74,7 +72,7 @@ ul li {
 	left: -1em;
 } 
 .track_choices{
-	width: 100%;
+	width: 80%;
 }
 .device, .playlistName {
 	width: 40%;

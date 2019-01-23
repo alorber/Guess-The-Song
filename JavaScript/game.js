@@ -19,28 +19,27 @@ $(document).ready(function(){
 		time_left_game--;
 		$("#Circle_timer").val(time_left_game).trigger('change');
 
-		$("#Timer").text("Time remaining: " + time_left_song + " seconds");
-
-		if (time_left_song <= 3) {
-			$("#Timer_div").effect("shake", {times: 1, distance: 10});
-		}
-
-		if (time_left_game <= 0){
+		if (time_left_game < 0){
 			alert("GAME OVER!");
 			return;
 		} 
 		if (time_left_song <= 0) {
-			$("#Timer").text("TIMES UP!");
 			$("#Guess_response").text("Guess Faster!");
+			$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
+			$("#Circle_timer").css('color', 'green')
 			clearInterval(counter);
 			playNext();
 			return;
 		}
+
+		if (time_left_song <= 3) {
+			$("#Timer_div").effect("shake", {times: 1, distance: 10});
+			$("#Circle_timer").trigger('configure', {'fgColor': '#b80000'});
+			$("#Circle_timer").css('color', '#b80000')
+		}
+
 	}
 	function startTimer(){
-		if (time_left_song == 10) {
-			$("#Timer").text("Time remaining: 10 seconds");
-		}
 		counter = setInterval(timer, 1000);
 	}
 
@@ -145,7 +144,7 @@ $(document).ready(function(){
 						});
 						$("#Pause_button").removeClass('hidden');
 						$("#Circle_timer").knob({
-							'max': 60,
+							'max': time_left_game,
 							'readOnly': true,
 							'fgColor': 'green'
 						});
@@ -167,7 +166,6 @@ $(document).ready(function(){
 			$("#Guess_response").text("NICE TRY!");
 			time_left_game -= 5;
 			$("#Circle_timer").val(time_left_game).trigger('change');
-			updateScore();
 		}
 		clearInterval(counter);
 		playNext();
