@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 	//Updates the Score
 	function updateScore(){
-		$("#Score").text("Score: " + score);
+		$("#Score").text(score);
 	}
 	//Creates a 10 Second Timer
 	function timer(){
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		if (time_left_song <= 3) {
 			$("#Timer_div").effect("shake", {times: 1, distance: 10});
 			$("#Circle_timer").trigger('configure', {'fgColor': '#b80000'});
-			$("#Circle_timer").css('color', '#b80000')
+			$("#Circle_timer").css('color', '#b80000');
 		}
 
 	}
@@ -44,6 +44,8 @@ $(document).ready(function(){
 	}
 
 	function playNext(){
+		$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
+		$("#Circle_timer").css('color', 'green')
 		fetch('/play_next')
 			.then(e => e.json())
 			.then(data => {
@@ -149,6 +151,7 @@ $(document).ready(function(){
 							'fgColor': 'green'
 						});
 						$("#Timer_div").removeClass('hidden');
+						$("#Score_div").removeClass('hidden');
 						updateScore();
 						startTimer();
 					}).catch(error => {console.log("Problem playing music: " + error)});
