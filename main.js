@@ -129,6 +129,8 @@ app.get('/get_user_playlists', function(req, res){
 });
 
 var playlist_id;
+var track_data;
+var track_start;
 
 //Loads Playlists Tracks and Sends to Page
 app.get('/get_playlist_tracks/:playlist_id', function(req, res){
@@ -160,19 +162,25 @@ app.get('/play_playlist/:device_id/:playlist_uri', function(req, res){
 							//Delays to Give Device Time to Change Song
 							setTimeout(function(data){
 								console.log("Skipped song");
-								//Skips a bit into the song so easier to identify
-								spotifyApi.seek(15000).then(function(data){
-									//Gets name of current track and returns it to the game
-									spotifyApi.getMyCurrentPlayingTrack()
-										.then(function(data){
-											//console.log("The current song is " + data.body.item.name);
-											res.send(data.body.item);
-										}, function(error){
-											console.log(error);
-										}).catch(error => {console.log(error)});
-								}, function(error){
-									console.log(error);
-								}).catch(error => {console.log(error)});
+								//Gets name of current track and returns it to the game
+								spotifyApi.getMyCurrentPlayingTrack()
+									.then(function(data){
+										//Skips to a random point in the song so it's easier to identify
+										track_data = data.body.item;
+										if (track_data.duration_ms >= 45000) {
+											track_start = Math.floor(Math.random() * (track_data.duration_ms - 40000) + 15000);
+										} else {
+											track_start = 15000;
+										}
+										spotifyApi.seek(track_start)
+											.then(function(data){			
+												res.send(track_data);
+											}, function(error){
+												console.log(error);
+											}).catch(error => {console.log(error)});
+									}, function(error){
+										console.log(error);	
+									}).catch(error => {console.log(error)});
 							}, 600);
 						}, function(error){
 							console.log(error);
@@ -194,22 +202,28 @@ app.get('/play_next', function(req, res){
 			//Delays to Give Device Time to Change Song
 			setTimeout(function(data){
 				console.log("Skipped song");
-				//Skips a bit into the song so easier to identify
-				spotifyApi.seek(15000).then(function(data){
-					//Gets name of current track and returns it to the game
-					spotifyApi.getMyCurrentPlayingTrack()
-						.then(function(data){
-						res.send(data.body.item);
+				//Gets name of current track and returns it to the game
+				spotifyApi.getMyCurrentPlayingTrack()
+					.then(function(data){
+						//Skips a bit into the song so easier to identify
+						track_data = data.body.item;
+						if (track_data.duration_ms >= 45000) {
+							track_start = Math.floor(Math.random() * (track_data.duration_ms - 40000) + 15000);
+						} else {
+							track_start = 15000;
+						}
+						spotifyApi.seek(track_start).then(function(data){
+							res.send(track_data);
+						}, function(error){
+							console.log(error);
+						}).catch(error => {console.log(error)});
 					}, function(error){
 						console.log(error);
 					}).catch(error => {console.log(error)});
-				}, function(error){
-					console.log(error);
-				}).catch(error => {console.log(error)});
 			}, 200);
-	}, function(error){
-		console.log(error);
-	}).catch(error => {console.log(error)});
+		}, function(error){
+			console.log(error);
+		}).catch(error => {console.log(error)});
 
 });
 
