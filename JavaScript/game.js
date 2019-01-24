@@ -8,6 +8,7 @@ $(document).ready(function(){
 	var time_left_song = 10;
 	var time_left_game = 60;
 	var counter;
+	var song_number = 1;
 
 	//Updates the Score
 	function updateScore(){
@@ -46,7 +47,14 @@ $(document).ready(function(){
 	function playNext(){
 		$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
 		$("#Circle_timer").css('color', 'green')
-
+		//Check if you are at end of playlist
+		if (song_number == playlist_tracks.length) {
+			alert("You finished the playlist");
+		} else {
+			let tracks_left = playlist_tracks.length - song_number;
+			console.log("There are " + tracks_left + " tracks left.");
+			song_number++;
+		}
 		fetch('/play_next')
 			.then(e => e.json())
 			.then(data => {
