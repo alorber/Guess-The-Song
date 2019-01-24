@@ -18,7 +18,7 @@ $(document).ready(function(){
 	});
 
 	$(window).click(function(){
-		$("#Instructions p").show();
+		$(".instructions").show();
 		$("#Log_in_button").show();
 		$("#Login").show();
 		$("#Log_in_text").show();

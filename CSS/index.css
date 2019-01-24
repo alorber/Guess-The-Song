@@ -11,7 +11,7 @@ h1 {
 #name p {
 	text-align: center;
 }
-#Instructions p, #Log_in_text{
+.instructions, #Log_in_text{
 	display: none;
 	text-align: center;
 	width: 100%;

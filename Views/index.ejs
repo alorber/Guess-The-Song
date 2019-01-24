@@ -12,19 +12,29 @@
 			<div class="row">
 				<h1>Guess the Song</h1>
 			</div>
-			<div id="name">
-				<p>Created by Andrew Lorber</p>
+			<div id="name" class="row">
+				<p class="col-12">Created by Andrew Lorber</p>
 			</div>
-			<div class="row" id="Instructions">
-				<p id="P1" class="hidden">This is a Spotify song guessing game</p> 
-				<p id="P2">Open Spotify on one of your devices</p> 
-				<p id="P3">Select which device and playlist you would like to play with</p> 
-				<p id="P4">A random song from the playlist will play on your device</p> 
-				<p id="P5">Try to guess which song is playing</p> 
-				<p id="P6">See how many points you can score in one minute!</p>
+			<div class="row">
+				<p id="P1" class="instructions col-12">This is a Spotify song guessing game</p> 
+			</div>
+			<div>
+				<p id="P2" class="instructions col-12">Open Spotify on one of your devices</p> 
+			</div>
+			<div>
+				<p id="P3" class="instructions col-12">Select which device and playlist you would like to play with</p> 
+			</div>
+			<div>
+				<p id="P4" class="instructions col-12">A random song from the playlist will play on your device</p> 
+			</div>
+			<div>
+				<p id="P5" class="instructions col-12">Try to guess which song is playing</p> 
+			</div>
+			<div>
+				<p id="P6" class="instructions col-12">See how many points you can score in one minute!</p>
 			</div>
 			<div class="row" id="Login">
-				<p id="Log_in_text">Please log into your spotify account to play. <br><span style="font-size: .6em;">Note: You must have a premium account to play this game.</span></p>
+				<p id="Log_in_text" class="col-12">Please log into your spotify account to play. <br><span style="font-size: .6em;">Note: You must have a premium account to play this game.</span></p>
 			</div>
 			<div id="Log_in_div">
 				<a href=<%=authurl%> class="btn btn-outline-success" id="Log_in_button" role="button">Log in</a>	
