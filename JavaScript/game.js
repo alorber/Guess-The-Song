@@ -46,6 +46,7 @@ $(document).ready(function(){
 	function playNext(){
 		$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
 		$("#Circle_timer").css('color', 'green')
+
 		fetch('/play_next')
 			.then(e => e.json())
 			.then(data => {
@@ -144,7 +145,7 @@ $(document).ready(function(){
 						chosenTracks.forEach(function(track){
 							$("#List").append('<li><a href="#" class="track_choices btn btn-success role=button">' + track + '</a></li>' );
 						});
-						$("#Pause_button").removeClass('hidden');
+						$("#Pause_div").removeClass('hidden');
 						$("#Circle_timer").knob({
 							'max': time_left_game,
 							'readOnly': true,
@@ -152,6 +153,7 @@ $(document).ready(function(){
 						});
 						$("#Timer_div").removeClass('hidden');
 						$("#Score_div").removeClass('hidden');
+						$("#Playlist_header").removeClass('hidden');
 						updateScore();
 						startTimer();
 					}).catch(error => {console.log("Problem playing music: " + error)});

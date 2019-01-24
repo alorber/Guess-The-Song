@@ -11,11 +11,17 @@
 	margin-top: .3em;
 	margin-bottom: .5em;
 }
+#Score_div p {
+	font-size: 2em;
+	color: green;
+}
 #Timer_div {
 	align-content: center;
 	justify-content: center;
 	width: 100%;
 	display: flex;
+	position: relative;
+	top: -1em;
 }
 #Circle_timer {
 	text-align: center;
