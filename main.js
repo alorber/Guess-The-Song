@@ -167,14 +167,14 @@ app.get('/play_playlist/:device_id/:playlist_uri', function(req, res){
 										.then(function(data){
 											//console.log("The current song is " + data.body.item.name);
 											res.send(data.body.item);
-										}, function(err){
+										}, function(error){
 											console.log(error);
 										}).catch(error => {console.log(error)});
-								}, function(err){
+								}, function(error){
 									console.log(error);
 								}).catch(error => {console.log(error)});
 							}, 600);
-						}, function(err){
+						}, function(error){
 							console.log(error);
 						}).catch(error => {console.log(error)});
 				}, function(err){
@@ -200,14 +200,14 @@ app.get('/play_next', function(req, res){
 					spotifyApi.getMyCurrentPlayingTrack()
 						.then(function(data){
 						res.send(data.body.item);
-					}, function(err){
+					}, function(error){
 						console.log(error);
 					}).catch(error => {console.log(error)});
-				}, function(err){
+				}, function(error){
 					console.log(error);
 				}).catch(error => {console.log(error)});
 			}, 200);
-	}, function(err){
+	}, function(error){
 		console.log(error);
 	}).catch(error => {console.log(error)});
 
@@ -216,7 +216,7 @@ app.get('/play_next', function(req, res){
 app.get('/pause', function(req, res){
 	
 	spotifyApi.pause()
-		.then(function(data){}, function(err){console.log(error)})
+		.then(function(data){}, function(error){console.log(error)})
 		.catch(error => {console.log(error)});
 
 });
@@ -224,7 +224,7 @@ app.get('/pause', function(req, res){
 app.get('/play', function(req, res){
 
 	spotifyApi.play()
-		.then(function(data){}, function(err){console.log(error)})
+		.then(function(data){}, function(error){console.log(error)})
 		.catch(error => {console.log(error)});
 
 });
