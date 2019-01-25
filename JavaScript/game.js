@@ -9,31 +9,50 @@ $(document).ready(function(){
 	var time_left_game = 60;
 	var counter;
 	var song_number = 1;
+	//Keeps track of game mode: 0 = Time Challenge, 1 = Song Run
+	var game_mode = 0;
+	var lives = 3;
 
 	//Updates the Score
 	function updateScore(){
 		$("#Score").text(score);
 	}
+	//Takes away a life
+	function loseLife(){
+		lives--;
+		$("#Hearts li:last-child").effect("shake", {times: 1, distance: 5}).fadeOut(function(){ 
+			$(this).remove(); 
+			if (lives <= 0) {
+				alert("game over! Out of lives!");
+			}
+		});	
+	}
 	//Creates a 10 Second Timer
 	function timer(){
-		time_left_song--;
+		
 		time_left_game--;
 		$("#Circle_timer").val(time_left_game).trigger('change');
 
-		if (time_left_game < 0){
-			alert("GAME OVER!");
-			return;
+		if (game_mode == 0) {
+			time_left_song--;
+			if (time_left_game < 0){
+				alert("GAME OVER!");
+				return;
+			} 
 		} 
-		if (time_left_song <= 0) {
+		if ( (time_left_song <= 0 && game_mode == 0) || (time_left_game <=0 && game_mode == 1) ) {
 			$("#Guess_response").text("Guess Faster!");
 			$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
-			$("#Circle_timer").css('color', 'green')
+			$("#Circle_timer").css('color', 'green');
+			if (game_mode == 1) {
+				loseLife();
+			}
 			clearInterval(counter);
 			playNext();
 			return;
 		}
 
-		if (time_left_song <= 3) {
+		if (time_left_song <= 3 || time_left_game <= 3) {
 			$("#Timer_div").effect("shake", {times: 1, distance: 10});
 			$("#Circle_timer").trigger('configure', {'fgColor': '#b80000'});
 			$("#Circle_timer").css('color', '#b80000');
@@ -65,6 +84,10 @@ $(document).ready(function(){
 					$("#List").append('<li><a href="#" class="track_choices btn btn-success role=button">' + track + '</a></li>' );
 				});
 				time_left_song = 10;
+				if (game_mode == 1) {
+					time_left_game = 5;
+					$("#Circle_timer").val(time_left_game).trigger('change');
+				}
 				startTimer();
 				$(".track_choices").prop("disabled", false);
 			}).catch(error => {console.log(error)});
@@ -126,19 +149,32 @@ $(document).ready(function(){
 		fetch('/get_user_playlists')
 			.then(e => e.json())
 			.then(data => {
+				//Adds button for each playlist
 				data.forEach(function(playlist){
 					$("#List").append('<li><a href="#" class="playlistName btn btn-outline-success" data-id=' + playlist.id + ' data-uri =' + playlist.uri +'>' + playlist.name + '</a></li>');
 				});	
 			}).catch(error => {alert("Problem loading playlists: " + error)});
 	});
 
-	//Load Playlist Tracks and Begin Game
 	$("body").on("click", ".playlistName", function(e){
 		$("#List").empty();
-		$("#Head_text").text("Which song do you think is playing?");
 		$("#Playlist_header").text("Playlist: " + $(this).text());
 		playlist_id = $(this).attr("data-id");
 		playlist_uri = $(this).attr("data-uri");
+		$("#Head_text").text("Which game mode would you like to play?");
+		//Adds the two game buttons
+		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Time_challenge" role="button" data-mode="0"> Time Challenge </a></li>');
+		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Song_run" role="button" data-mode="1"> Song Run </a></li>');
+	});
+
+
+	//Load Playlist Tracks and Begin Game
+	$("body").on("click", ".gameMode", function(e){
+		$("#List").empty();
+		$("#Head_text").text("");
+		game_mode = $(this).attr("data-mode");
+		//Sets up clock for song run
+		if (game_mode == 1) {time_left_game = 5;}
 		//Load Playlist Tracks
 		fetch('/get_playlist_tracks/' + playlist_id)
 			.then(e => e.json())
@@ -147,9 +183,10 @@ $(document).ready(function(){
 				fetch('/play_playlist/' + device_id + '/' + playlist_uri)
 					.then(e => e.json())
 					.then(data => {
-						//console.log(data);
+						$("#Head_text").text("Which song do you think is playing?");
 						current_track = data.name;
 						var chosenTracks = pickTracks();
+						//Creates button for each track choice
 						chosenTracks.forEach(function(track){
 							$("#List").append('<li><a href="#" class="track_choices btn btn-success role=button">' + track + '</a></li>' );
 						});
@@ -159,26 +196,39 @@ $(document).ready(function(){
 							'readOnly': true,
 							'fgColor': 'green'
 						});
+						$("#Circle_timer").value = 5;
 						$("#Timer_div").removeClass('hidden');
 						$("#Score_div").removeClass('hidden');
 						$("#Playlist_header").removeClass('hidden');
+						if (game_mode == 1) {
+							$("#Hearts_div").removeClass('hidden');
+						}
 						updateScore();
 						startTimer();
 					}).catch(error => {console.log("Problem playing music: " + error)});
 			});
 	});
+
 	//Checks if answer was correct and updates score
 	$("body").on("click", ".track_choices", function(e){
 		//Stops multiple clicks
 		$(".track_choices").prop("disabled", true);
 		if ($(this).text() == current_track) {
 			$("#Guess_response").text("CORRECT!");
-			score += (time_left_song + 1);
+			if (game_mode == 0) {
+				score += (time_left_song + 1);
+			} else {
+				score++;
+			}
 			updateScore();
 		} else {
 			$("#Guess_response").text("NICE TRY!");
-			time_left_game -= 5;
-			$("#Circle_timer").val(time_left_game).trigger('change');
+			if (game_mode == 0) {
+				time_left_game -= 5;
+				$("#Circle_timer").val(time_left_game).trigger('change');
+			} else {
+				loseLife()
+			}	
 		}
 		clearInterval(counter);
 		playNext();

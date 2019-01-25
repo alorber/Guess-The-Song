@@ -34,6 +34,15 @@
 	right: 1em;
 	margin-bottom: -1em;
 }
+#Hearts {
+	list-style-type: none;
+	color: #b80000;
+	margin-top: -2.5em;
+}
+.heart {
+	display: inline;
+	font-size: 2.3em;
+}
 #Head_text {
 	margin-bottom: .8em;
 	text-align: center;
@@ -71,7 +80,7 @@
 	list-style-type: none;
 	justify-content: center;
 }
-ul li {
+#List li {
 	text-align: center;
 	padding-bottom: .7em;
 	position: relative;
@@ -80,9 +89,13 @@ ul li {
 .track_choices{
 	width: 80%;
 }
-.device, .playlistName {
+.device, .playlistName, .gameMode {
 	width: 40%;
 	margin: auto;
+}
+.gameMode {
+	margin-bottom: 1em;
+	margin-top: .5em;
 }
 #Modal_title {
 	text-align: center;
