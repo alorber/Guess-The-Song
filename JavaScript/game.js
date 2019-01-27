@@ -9,7 +9,7 @@ $(document).ready(function(){
 	var time_left_game = 60;
 	var counter;
 	var song_number = 1;
-	//Keeps track of game mode: 0 = Time Challenge, 1 = Song Run
+	//Keeps track of game mode: 0 = Time Challenge, 1 = Classic Mode
 	var game_mode = 0;
 	var lives = 3;
 
@@ -164,7 +164,7 @@ $(document).ready(function(){
 		$("#Head_text").text("Which game mode would you like to play?");
 		//Adds the two game buttons
 		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Time_challenge" role="button" data-mode="0"> Time Challenge </a></li>');
-		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Song_run" role="button" data-mode="1"> Song Run </a></li>');
+		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Song_run" role="button" data-mode="1"> Classic Mode </a></li>');
 	});
 
 
@@ -173,7 +173,7 @@ $(document).ready(function(){
 		$("#List").empty();
 		$("#Head_text").text("");
 		game_mode = $(this).attr("data-mode");
-		//Sets up clock for song run
+		//Sets up clock for classic mode
 		if (game_mode == 1) {time_left_game = 5;}
 		//Load Playlist Tracks
 		fetch('/get_playlist_tracks/' + playlist_id)
