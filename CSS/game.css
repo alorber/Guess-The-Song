@@ -66,11 +66,13 @@
 #Loading_text {
 	font-size: 1.5em;
 	text-align: center;
+	position: relative;
+	left: 1em;
 }
 #Spinner_div{
 	justify-content: center;
 	position: relative;
-	right: 1.2em;
+	right: -.3em;
 }
 .spinner-border {
 	width: 3em;
