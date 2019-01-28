@@ -41,7 +41,7 @@ $(document).ready(function(){
 			} 
 		} 
 		if ( (time_left_song <= 0 && game_mode == 0) || (time_left_game <=0 && game_mode == 1) ) {
-			$("#Guess_response").text("Guess Faster!");
+			setGuessResponse("Guess Faster!");
 			$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
 			$("#Circle_timer").css('color', 'green');
 			if (game_mode == 1) {
@@ -62,7 +62,7 @@ $(document).ready(function(){
 	function startTimer(){
 		counter = setInterval(timer, 1000);
 	}
-
+	//Plays next song
 	function playNext(){
 		$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
 		$("#Circle_timer").css('color', 'green')
@@ -93,7 +93,6 @@ $(document).ready(function(){
 				$(".track_choices").prop("disabled", false);
 			}).catch(error => {console.log(error)});
 	}
-
 	//Picks The Song Options
 	function pickTracks(){
 		let chosenTracks = [];
@@ -114,6 +113,15 @@ $(document).ready(function(){
 			chosenTracks.push(current_track);
 		}
 		return chosenTracks;
+	}
+	//Sets guess response
+	function setGuessResponse(text){
+		$("#Guess_response").text(text);
+		$("#Guess_response").fadeIn(function(){
+			setTimeout(function(){
+				$("#Guess_response").fadeOut();
+			}, 500);
+		});
 	}
 
 	//Load User Devices
@@ -232,8 +240,9 @@ $(document).ready(function(){
 	$("body").on("click", ".track_choices", function(e){
 		//Stops multiple clicks
 		$(".track_choices").prop("disabled", true);
+		$("Guess_response").hide();
 		if ($(this).text() == current_track) {
-			$("#Guess_response").text("CORRECT!");
+			setGuessResponse("CORRECT!");
 			if (game_mode == 0) {
 				score += (time_left_song + 1);
 			} else {
@@ -241,7 +250,7 @@ $(document).ready(function(){
 			}
 			updateScore();
 		} else {
-			$("#Guess_response").text("NICE TRY!");
+			setGuessResponse("Nice Try!");
 			if (game_mode == 0) {
 				time_left_game -= 5;
 				$("#Circle_timer").val(time_left_game).trigger('change');

@@ -11,6 +11,14 @@
 	margin-top: .3em;
 	margin-bottom: .5em;
 }
+#Guess_response {
+	text-align: left;
+	position: relative;
+	left: -3em;
+	top: 1em;
+	width: 100%;
+	display: none;
+}
 #Score_div p {
 	font-size: 2em;
 	color: green;
@@ -45,10 +53,6 @@
 }
 #Head_text {
 	margin-bottom: .8em;
-	text-align: center;
-	width: 100%;
-}
-#Guess_response {
 	text-align: center;
 	width: 100%;
 }
