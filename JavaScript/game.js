@@ -123,16 +123,7 @@ $(document).ready(function(){
 			}, 500);
 		});
 	}
-
-	//Load User Devices
-	$("#Start_button").click(function(e){
-		e.preventDefault;
-		$("#Start_game").hide();
-		$("#Head_text").text("Which device would you like to listen on?");
-		//Loading Text
-		$("#Loading_text_div").removeClass('hidden');
-		$("#Spinner_div").removeClass('hidden');
-
+	function getDevices(){
 		fetch('/get_user_devices')
 			.then(e => e.json())
 			.then(data => {
@@ -149,8 +140,30 @@ $(document).ready(function(){
 					$("#List").append('<li><a href="#" class="device btn btn-outline-success" id=' 
 						+ device.id + ' role = "button">' + device.name + '</a></li>');
 				});
+				$("#List").append('<li><a href="#" id="Reload_devices" class="btn btn-outline-warning"' 
+					+ 'role="button">Reload Devices</a></li>');
 			}).catch(error => {alert("Problem loading devices: " + error)});
-	})
+	}
+
+	//Load User Devices
+	$("#Start_button").click(function(e){
+		e.preventDefault;
+		$("#Start_game").hide();
+		$("#Head_text").text("Which device would you like to listen on?");
+		//Loading Text
+		$("#Loading_text_div").removeClass('hidden');
+		$("#Spinner_div").removeClass('hidden');
+		getDevices();
+	});
+
+	$("body").on("click", "#Reload_devices", function(e){
+		e.preventDefault();
+		$("#List").empty();
+		$("#Loading_text").text("Loading...");
+		$("#Loading_text_div").removeClass('hidden');
+		$("#Spinner_div").removeClass('hidden');
+		getDevices();
+	});
 
 	//Load User Playlists
 	$("body").on("click", ".device", function(e){
