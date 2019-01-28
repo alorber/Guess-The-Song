@@ -13,8 +13,6 @@ $(document).ready(function(){
 	var game_mode = 0;
 	var lives = 3;
 	
-	//Enables tooltips
-	$("body").tooltip({ selector: '[data-toggle="tooltip"]' });
 	//Updates the Score
 	function updateScore(){
 		$("#Score").text(score);
@@ -178,11 +176,18 @@ $(document).ready(function(){
 		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Classic_mode" role="button"'
 			+ ' data-mode="1" data-toggle="tooltip" data-placement="left" data-html="true"'
 			+ ' title="3 lives</br>5 seconds per song</br>1 point per correct answer"> Classic Mode </a></li>');
+		//Enables tooltips
+		if (/Mobi|Android/i.test(navigator.userAgent)) {
+    		$("#Rules_div").removeClass('hidden');
+		} else {
+			$("body").tooltip({ selector: '[data-toggle="tooltip"]' });
+		}
 	});
 
 
 	//Load Playlist Tracks and Begin Game
 	$("body").on("click", ".gameMode", function(e){
+		$("#Rules_div").addClass('hidden');
 		$(".gameMode").tooltip('dispose');
 		$("#List").empty();
 		$("#Head_text").text("");

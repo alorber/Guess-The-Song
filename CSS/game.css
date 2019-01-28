@@ -23,7 +23,7 @@
 	position: relative;
 	top: -1em;
 }
-#Circle_timer {
+#Circle_timer, #Rules {
 	text-align: center;
 }
 #Pause_button {
