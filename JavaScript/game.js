@@ -12,7 +12,9 @@ $(document).ready(function(){
 	//Keeps track of game mode: 0 = Time Challenge, 1 = Classic Mode
 	var game_mode = 0;
 	var lives = 3;
-
+	
+	//Enables tooltips
+	$("body").tooltip({ selector: '[data-toggle="tooltip"]' });
 	//Updates the Score
 	function updateScore(){
 		$("#Score").text(score);
@@ -81,7 +83,8 @@ $(document).ready(function(){
 				current_track = data.name;
 				let chosenTracks = pickTracks();
 				chosenTracks.forEach(function(track){
-					$("#List").append('<li><a href="#" class="track_choices btn btn-success role=button">' + track + '</a></li>' );
+					$("#List").append('<li><a href="#" class="track_choices btn btn-success role=button">' 
+						+ track + '</a></li>' );
 				});
 				time_left_song = 10;
 				if (game_mode == 1) {
@@ -102,7 +105,8 @@ $(document).ready(function(){
 			if(Math.floor(Math.random() * 4) == 3 && chosenTracks.indexOf(current_track) == -1){
 				chosenTracks.push(current_track);
 			}
-			if(chosenTracks.indexOf(playlist_tracks[random].track.name) == -1 && current_track !== playlist_tracks[random].track.name){
+			if(chosenTracks.indexOf(playlist_tracks[random].track.name) == -1 
+					&& current_track !== playlist_tracks[random].track.name){
 				chosenTracks.push(playlist_tracks[random].track.name);
 			} else {
 				i--;
@@ -129,13 +133,15 @@ $(document).ready(function(){
 				$("#Spinner_div").addClass('hidden');
 				//Checks if there are no active devices
 				if (Object(data).length == 0) {
-					$("#Loading_text").text("No devices found! Please open Spotify on one of your devices and click the button below to try again.");
+					$("#Loading_text").text("No devices found! Please open Spotify on one of your devices"
+						+ " and click the button below to try again.");
 				} else {
 					$("#Loading_text_div").addClass('hidden');
 				}
 				//Loads device options
 				data.forEach(function(device){
-					$("#List").append('<li><a href="#" class="device btn btn-outline-success" id=' + device.id + ' role = "button">' + device.name + '</a></li>');
+					$("#List").append('<li><a href="#" class="device btn btn-outline-success" id=' 
+						+ device.id + ' role = "button">' + device.name + '</a></li>');
 				});
 			}).catch(error => {alert("Problem loading devices: " + error)});
 	})
@@ -151,7 +157,8 @@ $(document).ready(function(){
 			.then(data => {
 				//Adds button for each playlist
 				data.forEach(function(playlist){
-					$("#List").append('<li><a href="#" class="playlistName btn btn-outline-success" data-id=' + playlist.id + ' data-uri =' + playlist.uri +'>' + playlist.name + '</a></li>');
+					$("#List").append('<li><a href="#" class="playlistName btn btn-outline-success" data-id='
+						+ playlist.id + ' data-uri =' + playlist.uri +'>' + playlist.name + '</a></li>');
 				});	
 			}).catch(error => {alert("Problem loading playlists: " + error)});
 	});
@@ -163,13 +170,20 @@ $(document).ready(function(){
 		playlist_uri = $(this).attr("data-uri");
 		$("#Head_text").text("Which game mode would you like to play?");
 		//Adds the two game buttons
-		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Time_challenge" role="button" data-mode="0"> Time Challenge </a></li>');
-		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Song_run" role="button" data-mode="1"> Classic Mode </a></li>');
+		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" data-html="true" id="Time_challenge"' 
+			+ ' role="button" data-mode="0" data-toggle="tooltip" data-placement="right" ' 
+			+ 'title="60 seconds</br>10 seconds per song ' 
+			+ '</br>The faster you answer the more points you will score</br>'
+			+ 'An incorrect answer will subtract 5 seconds"> Time Challenge </a></li>');
+		$("#List").append('<li><a href="#" class="gameMode btn btn-outline-success" id="Classic_mode" role="button"'
+			+ ' data-mode="1" data-toggle="tooltip" data-placement="left" data-html="true"'
+			+ ' title="3 lives</br>5 seconds per song</br>1 point per correct answer"> Classic Mode </a></li>');
 	});
 
 
 	//Load Playlist Tracks and Begin Game
 	$("body").on("click", ".gameMode", function(e){
+		$(".gameMode").tooltip('dispose');
 		$("#List").empty();
 		$("#Head_text").text("");
 		game_mode = $(this).attr("data-mode");

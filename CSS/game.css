@@ -97,6 +97,9 @@
 	margin-bottom: 1em;
 	margin-top: .5em;
 }
+.bs-tooltip-right {
+	margin-top: 3em;
+}
 #Modal_title {
 	text-align: center;
 	color: green;
