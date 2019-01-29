@@ -3,13 +3,15 @@ h1 {
 	width: 100%;
 	color: green;
 }
-#name {
+#Name {
 	font-size: .6em;
 	justify-content: center;
 	width: 100%;
 }
-#name p {
+#Name p {
 	text-align: center;
+	position: relative;
+	left: 1em;
 }
 .instructions, #Log_in_text{
 	display: none;
