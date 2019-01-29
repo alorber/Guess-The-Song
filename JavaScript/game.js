@@ -23,7 +23,7 @@ $(document).ready(function(){
 		$("#Hearts li:last-child").effect("shake", {times: 1, distance: 5}).fadeOut(function(){ 
 			$(this).remove(); 
 			if (lives <= 0) {
-				alert("game over! Out of lives!");
+				endGame();
 			}
 		});	
 	}
@@ -36,7 +36,7 @@ $(document).ready(function(){
 		if (game_mode == 0) {
 			time_left_song--;
 			if (time_left_game < 0){
-				alert("GAME OVER!");
+				endGame();
 				return;
 			} 
 		} 
@@ -123,6 +123,7 @@ $(document).ready(function(){
 			}, 500);
 		});
 	}
+	//Gets user devices
 	function getDevices(){
 		fetch('/get_user_devices')
 			.then(e => e.json())
@@ -144,6 +145,36 @@ $(document).ready(function(){
 					+ 'role="button">Reload Devices</a></li>');
 			}).catch(error => {alert("Problem loading devices: " + error)});
 	}
+	//Clears screen and shows game over screen
+	function endGame(){
+		clearInterval(counter);
+		$("#List").empty();
+		$("#Head_text").addClass("hidden");
+		$("#Pause_div").addClass('hidden');
+		$("#Timer_div").addClass('hidden');
+		$("#Score_div").addClass('hidden');
+		$("#Playlist_header").addClass('hidden');
+		$("#Hearts_div").addClass('hidden');
+		$("#Guess_response").addClass('hidden');
+		var opening_text = "Well Done! You really know your music!";
+		var score_text = "Your score was " + score;
+		//Changes text depending on score and game mode
+		if (game_mode == 1) {
+			if (score == 1){
+				score_text = "You knew " + score + " song";
+			} else {
+				score_text = "You knew " + score + " songs";
+			}
+			if (score < 10) {
+				opening_text = "Nice Try! You need to listen to some more music.";
+			}
+		} else if (game_mode == 0 && score < 100) {
+			opening_text = "Nice Try! You need to listen to some more music.";
+		}
+		$("#Game_over_text").html("Game Over!<br/>" + opening_text + "</br>" + score_text);
+		$("#Game_over_div").removeClass('hidden');
+		$("#List").append('<li><a href="#" class="btn btn-success" id="Play_again" role="button">Play Again</a></li>');
+	}
 
 	//Load User Devices
 	$("#Start_button").click(function(e){
@@ -155,7 +186,7 @@ $(document).ready(function(){
 		$("#Spinner_div").removeClass('hidden');
 		getDevices();
 	});
-
+	//Reload devices button
 	$("body").on("click", "#Reload_devices", function(e){
 		e.preventDefault();
 		$("#List").empty();
@@ -293,6 +324,10 @@ $(document).ready(function(){
 	//Reload Button
 	$("#Reload_button").click(function(e){
 		e.preventDefault;
+		page.reload();
+	});
+
+	$("body").on("click", "#Play_again", function(e){
 		page.reload();
 	});
 

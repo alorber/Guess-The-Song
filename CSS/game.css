@@ -31,7 +31,7 @@
 	position: relative;
 	top: -1em;
 }
-#Circle_timer, #Rules {
+#Circle_timer, #Rules, #Game_over {
 	text-align: center;
 }
 #Pause_button {
@@ -78,6 +78,11 @@
 	width: 3em;
 	height: 3em;
 }
+#Game_over_div {
+	font-size: 2em;
+	position: relative;
+	top: -3em;
+}
 #List_div {
 	justify-content: center;
 }
@@ -105,6 +110,11 @@
 }
 .bs-tooltip-right {
 	margin-top: 3em;
+}
+#Play_again {
+	position: relative;
+	top: -4em;
+	width: 80%;
 }
 #Modal_title {
 	text-align: center;
