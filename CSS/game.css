@@ -46,6 +46,7 @@
 	list-style-type: none;
 	color: #b80000;
 	margin-top: -2.5em;
+	display: flex;
 }
 .heart {
 	display: inline;
