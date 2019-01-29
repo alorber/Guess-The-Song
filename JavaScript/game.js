@@ -4,6 +4,7 @@ $(document).ready(function(){
 	var playlist_id;
 	var playlist_tracks;
 	var current_track;
+	var playlist_over = false;
 	var score = 0;
 	var time_left_song = 10;
 	var time_left_game = 60;
@@ -72,10 +73,9 @@ $(document).ready(function(){
 	function playNext(){
 		//Check if you are at end of playlist
 		if (song_number == playlist_tracks.length) {
-			alert("You finished the playlist");
+			playlist_over = true;
+			endGame();
 		} else {
-			let tracks_left = playlist_tracks.length - song_number;
-			console.log("There are " + tracks_left + " tracks left.");
 			song_number++;
 		}
 		fetch('/play_next')
@@ -175,6 +175,9 @@ $(document).ready(function(){
 			}
 		} else if (game_mode == 0 && score < 100) {
 			opening_text = "Nice Try! You need to listen to some more music.";
+		}
+		if (playlist_over) {
+			opening_text = "Wow! You completed the playlist! You really know your stuff!";
 		}
 		$("#Game_over_text").html("Game Over!<br/>" + opening_text + "</br>" + score_text);
 		$("#Game_over_div").removeClass('hidden');
