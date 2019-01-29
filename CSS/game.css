@@ -111,7 +111,7 @@
 .bs-tooltip-right {
 	margin-top: 3em;
 }
-#Play_again {
+#Play_again, #Game_over_logout {
 	position: relative;
 	top: -4em;
 	width: 80%;

@@ -156,6 +156,7 @@ $(document).ready(function(){
 		$("#Playlist_header").addClass('hidden');
 		$("#Hearts_div").addClass('hidden');
 		$("#Guess_response").addClass('hidden');
+		fetch('/pause').catch(error => {console.log(error)});
 		var opening_text = "Well Done! You really know your music!";
 		var score_text = "Your score was " + score;
 		//Changes text depending on score and game mode
@@ -174,6 +175,8 @@ $(document).ready(function(){
 		$("#Game_over_text").html("Game Over!<br/>" + opening_text + "</br>" + score_text);
 		$("#Game_over_div").removeClass('hidden');
 		$("#List").append('<li><a href="#" class="btn btn-success" id="Play_again" role="button">Play Again</a></li>');
+		$("#List").append('<li><a href="https://accounts.spotify.com/en/logout" '
+			+ 'class="btn btn-danger" id="Game_over_logout" role="button">Log Out</a></li>');
 	}
 
 	//Load User Devices
