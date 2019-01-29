@@ -28,8 +28,7 @@ $(document).ready(function(){
 		});	
 	}
 	//Creates a 10 Second Timer
-	function timer(){
-		
+	function timer(){		
 		time_left_game--;
 		$("#Circle_timer").val(time_left_game).trigger('change');
 
@@ -51,21 +50,22 @@ $(document).ready(function(){
 			playNext();
 			return;
 		}
-
 		if (time_left_song <= 3 || time_left_game <= 3) {
-			$("#Timer_div").effect("shake", {times: 1, distance: 10});
-			$("#Circle_timer").trigger('configure', {'fgColor': '#b80000'});
-			$("#Circle_timer").css('color', '#b80000');
+			shakeTimer();
 		}
-
 	}
+	//Starts the timer
 	function startTimer(){
 		counter = setInterval(timer, 1000);
 	}
+	//Turns timer red and shakes it
+	function shakeTimer() {
+		$("#Circle_timer").trigger('configure', {'fgColor': '#b80000'});
+		$("#Circle_timer").css('color', '#b80000');
+		$("#Timer_div").effect("shake", {times: 1, distance: 10});
+	}
 	//Plays next song
 	function playNext(){
-		$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
-		$("#Circle_timer").css('color', 'green')
 		//Check if you are at end of playlist
 		if (song_number == playlist_tracks.length) {
 			alert("You finished the playlist");
@@ -296,10 +296,15 @@ $(document).ready(function(){
 		} else {
 			setGuessResponse("Nice Try!");
 			if (game_mode == 0) {
+				shakeTimer();
 				time_left_game -= 5;
 				$("#Circle_timer").val(time_left_game).trigger('change');
+				setTimeout(function(){
+					$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
+					$("#Circle_timer").css('color', 'green');
+				}, 400);
 			} else {
-				loseLife()
+				loseLife();
 			}	
 		}
 		clearInterval(counter);
