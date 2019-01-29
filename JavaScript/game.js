@@ -41,8 +41,7 @@ $(document).ready(function(){
 		} 
 		if ( (time_left_song <= 0 && game_mode == 0) || (time_left_game <=0 && game_mode == 1) ) {
 			setGuessResponse("Guess Faster!");
-			$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
-			$("#Circle_timer").css('color', 'green');
+			timerGreen();
 			if (game_mode == 1) {
 				loseLife();
 			}
@@ -63,6 +62,11 @@ $(document).ready(function(){
 		$("#Circle_timer").trigger('configure', {'fgColor': '#b80000'});
 		$("#Circle_timer").css('color', '#b80000');
 		$("#Timer_div").effect("shake", {times: 1, distance: 10});
+	}
+	//Turns timer green
+	function timerGreen(){
+		$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
+		$("#Circle_timer").css('color', 'green');
 	}
 	//Plays next song
 	function playNext(){
@@ -181,7 +185,7 @@ $(document).ready(function(){
 
 	//Load User Devices
 	$("#Start_button").click(function(e){
-		e.preventDefault;
+		e.preventDefault();
 		$("#Start_game").hide();
 		$("#Head_text").text("Which device would you like to listen on?");
 		//Loading Text
@@ -290,6 +294,7 @@ $(document).ready(function(){
 		$("Guess_response").hide();
 		if ($(this).text() == current_track) {
 			setGuessResponse("CORRECT!");
+			timerGreen();
 			if (game_mode == 0) {
 				score += (time_left_song + 1);
 			} else {
@@ -303,10 +308,10 @@ $(document).ready(function(){
 				time_left_game -= 5;
 				$("#Circle_timer").val(time_left_game).trigger('change');
 				setTimeout(function(){
-					$("#Circle_timer").trigger('configure', {'fgColor': 'green'});
-					$("#Circle_timer").css('color', 'green');
+					timerGreen();
 				}, 400);
 			} else {
+				timerGreen();
 				loseLife();
 			}	
 		}
