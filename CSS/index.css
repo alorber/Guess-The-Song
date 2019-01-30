@@ -13,6 +13,9 @@ h1 {
 	position: relative;
 	left: 1em;
 }
+a, a:hover {
+	color: black;
+}
 .instructions, #Log_in_text{
 	display: none;
 	text-align: center;
