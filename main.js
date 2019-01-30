@@ -5,8 +5,9 @@ var app = express();
 //Load ejs
 var ejs = require('ejs');
 app.set('view engine', 'ejs');
+app.set('views', __dirname + '/Views');
 
-app.use(express.static('/Users/AndrewLorber/Desktop/Guess the Song/'));
+app.use(express.static(__dirname));
 
 //Load the Spotify Node API
 var SpotifyWebApi = require('spotify-web-api-node');
