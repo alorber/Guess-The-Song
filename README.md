@@ -28,7 +28,7 @@ a) Time Challenge
 </ul></br>
 <img src="/img/Time_Challenge.png" alt="Time_Challenge" width="500" height="250" />
 
-b) Classic mode
+b) Classic Mode
 <ul>
  <li>3 lives</li>
  <li>5 seconds per song</li>
