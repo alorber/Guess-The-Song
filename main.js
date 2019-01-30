@@ -18,8 +18,16 @@ var spotifyApi = new SpotifyWebApi({
 });
 
 var scopes = ['playlist-read-private', 'playlist-read-collaborative', 'user-modify-playback-state', 
-	'user-read-currently-playing', 'user-read-private', 'user-library-read', 'user-read-playback-state'],
-	state = '123456';
+	'user-read-currently-playing', 'user-read-private', 'user-library-read', 'user-read-playback-state'];
+
+//Sets random values for state
+const validChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+var state = "";
+var random;
+for (i = 0; i < 15; i++) {
+	random = Math.floor(Math.random() * (validChars.length - 1));
+	state += validChars.charAt(random);
+}
 
 var authorizeURL = spotifyApi.createAuthorizeURL(scopes, state);
 
@@ -245,5 +253,5 @@ app.get('/play', function(req, res){
 
 });
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT || 8080, () => console.log("Currently listening on " + PORT));
