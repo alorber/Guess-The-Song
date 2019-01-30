@@ -6,7 +6,7 @@ var app = express();
 var ejs = require('ejs');
 app.set('view engine', 'ejs');
 
-app.use(express.static('/Users/AndrewLorber/Desktop/Spotify Web App/'));
+app.use(express.static('/Users/AndrewLorber/Desktop/Guess the Song/'));
 
 //Load the Spotify Node API
 var SpotifyWebApi = require('spotify-web-api-node');
@@ -227,6 +227,7 @@ app.get('/play_next', function(req, res){
 
 });
 
+//Pauses Music
 app.get('/pause', function(req, res){
 	
 	spotifyApi.pause()
@@ -235,6 +236,7 @@ app.get('/pause', function(req, res){
 
 });
 
+//Plays Music
 app.get('/play', function(req, res){
 
 	spotifyApi.play()
@@ -243,5 +245,5 @@ app.get('/play', function(req, res){
 
 });
 
-
-app.listen(8080);
+const PORT = process.env.PORT;
+app.listen(PORT || 8080, () => console.log("Currently listening on " + PORT));
