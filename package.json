@@ -18,5 +18,9 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "spotify-web-api-node": "^4.0.0"
+  },
+  "engines": {
+    "node": "11.6.0",
+    "npm": "6.5.0"
   }
 }
